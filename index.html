@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>My Pakhi ❤️</title>
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: system-ui, sans-serif;
+    }
+
+    html, body {
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+    }
+
+    body {
+      background: linear-gradient(135deg, #ffd6e8, #fff0f5);
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    /* ================= Pages ================= */
+    .page {
+      position: fixed;
+      inset: 0;
+      display: none;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      text-align: center;
+      padding: 24px;
+      animation: fade 1s ease;
+    }
+
+    .page.active {
+      display: flex;
+    }
+
+    h1 {
+      font-size: clamp(1.8rem, 6vw, 2.4rem);
+      color: #ff4d6d;
+      margin-bottom: 16px;
+    }
+
+    p {
+      font-size: clamp(1rem, 4vw, 1.15rem);
+      color: #444;
+      line-height: 1.9;
+      max-width: 680px;
+      margin-bottom: 18px;
+    }
+
+    button {
+      margin-top: 20px;
+      padding: 14px 40px;
+      border: none;
+      border-radius: 40px;
+      background: #ff4d6d;
+      color: white;
+      font-size: 1.05rem;
+      cursor: pointer;
+      transition: 0.3s;
+      box-shadow: 0 8px 20px rgba(255, 77, 109, 0.35);
+    }
+
+    button:active {
+      transform: scale(0.95);
+    }
+
+    /* ================= Hearts ================= */
+    .heart {
+      position: fixed;
+      top: -20px;
+      pointer-events: none;
+      animation-name: fall;
+      animation-timing-function: linear;
+      animation-fill-mode: forwards;
+      opacity: 0.85;
+    }
+
+    /* ================= Love ================= */
+    .love-final {
+      font-size: clamp(2.3rem, 8vw, 3rem);
+      color: #ff2e55;
+      text-shadow: 0 0 10px #ff8fab, 0 0 20px #ff4d6d;
+      animation: pulse 2s infinite;
+    }
+
+    .page img {
+      width: min(85%, 360px);
+      border-radius: 18px;
+      margin-top: 20px;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.25);
+    }
+
+    /* ================= Animations ================= */
+    @keyframes fade {
+      from { opacity: 0; transform: translateY(25px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Slow romantic heart fall */
+    @keyframes fall {
+      from {
+        transform: translateY(-30px) scale(1);
+        opacity: 0.9;
+      }
+      to {
+        transform: translateY(120vh) scale(1.4);
+        opacity: 0;
+      }
+    }
+
+    @keyframes pulse {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.08); }
+      100% { transform: scale(1); }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- ================= PAGES ================= -->
+
+  <div class="page active">
+    <h1>Amar lichu ❤️</h1>
+    <button onclick="nextPage()">Next</button>
+  </div>
+
+  <div class="page">
+    <h1>ভালোবাসি ❤️</h1>
+    <button onclick="nextPage()">Next</button>
+  </div>
+
+  <div class="page">
+    <h1>আমার শোনা 💕</h1>
+    <button onclick="nextPage()">Next</button>
+  </div>
+
+  <div class="page">
+    <h1>ভালোবাসি 💖</h1>
+    <button onclick="nextPage()">Next</button>
+  </div>
+
+  <div class="page">
+    <p>এই দিনটা শুধু তোমার জন্য 🌺</p>
+    <button onclick="nextPage()">Next</button>
+  </div>
+
+  <!-- 🎂 Birthday -->
+  <div class="page">
+    <h1>
+      শুভ জন্মদিন  
+      <br>
+      আমার কৃষ্ণচূড়া 🌺🎂
+    </h1>
+
+    <p style="font-size:1.15rem; color:#ff7a95;">
+      ✨ 19 December ✨
+    </p>
+
+    <p>
+      আজকের এই দিনে তুমি না আসলে,  
+      হয়তো তোমার মতো কাউকেই পেতাম না।  
+      <br>
+      তুমি আমার ভালোবাসা ❤️
+    </p>
+
+    <button onclick="nextPage()">Next</button>
+  </div>
+
+  <div class="page">
+    <h1 class="love-final">I Love You ❤️</h1>
+    <button onclick="nextPage()">Next</button>
+  </div>
+
+  <div class="page">
+    <h1>আমার কৃষ্ণচূড়া 🌺</h1>
+    <p>এই ফুলটা শুধুই তোমার জন্য</p>
+    <img src="krishnochura.jpg" alt="Krishnochura">
+  </div>
+
+  <!-- ================= JS ================= -->
+  <script>
+    const pages = document.querySelectorAll(".page");
+    let currentPage = 0;
+
+    function nextPage() {
+      pages[currentPage].classList.remove("active");
+      currentPage++;
+      if (currentPage < pages.length) {
+        pages[currentPage].classList.add("active");
+      }
+    }
+
+    /* Slow hearts – mobile friendly */
+    setInterval(() => {
+      const heart = document.createElement("div");
+      heart.className = "heart";
+      heart.innerHTML =
+        currentPage === pages.length - 1 ? "🌺" : "❤️";
+
+      heart.style.left = Math.random() * 100 + "vw";
+      heart.style.fontSize = 18 + Math.random() * 16 + "px";
+      heart.style.animationDuration = 8 + Math.random() * 6 + "s";
+
+      document.body.appendChild(heart);
+      setTimeout(() => heart.remove(), 15000);
+    }, 700);
+  </script>
+
+</body>
+</html>
